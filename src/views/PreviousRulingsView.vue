@@ -5,7 +5,7 @@ console.log(data)
 </script>
 
 <template>
-  <!-- Start: Implementation -->
-  👉 Your code goes here 👈
-  <!-- End: Implementation -->
+  <div>
+    <h2>Previous Rulings</h2>
+  </div>
 </template>
