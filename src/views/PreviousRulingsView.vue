@@ -21,7 +21,7 @@ watch(
 <template>
   <div class="previous-rulings">
     <div class="previous-rulings__header">
-      <h2>Previous Rulings - {{ selectedViewMode }}</h2>
+      <h2>Previous Rulings</h2>
       <ModeSelector v-model="selectedViewMode" class="previous-rulings__selector" />
     </div>
     <div class="previous-rulings__items">
