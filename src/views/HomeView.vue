@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import data from '../data/data.json'
+
+console.log(data)
+</script>
 
 <template>
   <!-- Start: Implementation -->
