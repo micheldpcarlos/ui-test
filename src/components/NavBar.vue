@@ -35,7 +35,7 @@
 <style lang="scss" scoped>
 .nav {
   position: fixed;
-  z-index: 2;
+  z-index: 6;
   top: 0;
   display: flex;
   width: calc(100vw - 2rem);

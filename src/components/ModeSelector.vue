@@ -11,9 +11,9 @@ const setSelection = (mode) => {
 </script>
 
 <template>
-  <div class="mode-selector" :class="{ 'mode-selector--open': open }" @blur="open = false">
+  <div class="mode-selector" :class="{ 'mode-selector--open': open }">
     <div class="mode-selector__selected" @click="open = !open">
-      {{ model }}
+      <span>{{ model }}</span>
     </div>
     <div class="mode-selector__items" :class="{ 'mode-selector__items--hidden': !open }">
       <div class="mode-selector__item" @click="setSelection('list')">List</div>
@@ -28,9 +28,10 @@ const setSelection = (mode) => {
   text-align: center;
   outline: none;
   font-size: 12px;
-  z-index: 9999;
+  z-index: 5;
   width: 173px;
   height: 36px;
+  margin-right: 4px;
 
   &__selected,
   &__item {
@@ -53,6 +54,10 @@ const setSelection = (mode) => {
   &__selected {
     position: relative;
     border-color: var(--color-darker-gray);
+
+    span {
+      margin-right: 24px;
+    }
 
     &::after {
       content: '';

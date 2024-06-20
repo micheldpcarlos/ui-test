@@ -1,17 +1,19 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { formatDistanceToNowStrict } from 'date-fns'
+import { useDataStore } from '@/stores/data'
 
-const props = defineProps(['voteItem'])
+const props = defineProps(['voteItem', 'mode'])
 
 const likePercentage = computed(() => {
+  console.log('CALCULA LIKE')
   const totalVotes = props.voteItem.votes.positive + props.voteItem.votes.negative
-  return totalVotes === 0 ? 0 : ((props.voteItem.votes.positive / totalVotes) * 100).toFixed(2)
+  return totalVotes === 0 ? 0 : ((props.voteItem.votes.positive / totalVotes) * 100).toFixed(1)
 })
 
 const dislikePercentage = computed(() => {
   const totalVotes = props.voteItem.votes.positive + props.voteItem.votes.negative
-  return totalVotes === 0 ? 0 : ((props.voteItem.votes.negative / totalVotes) * 100).toFixed(2)
+  return totalVotes === 0 ? 0 : ((props.voteItem.votes.negative / totalVotes) * 100).toFixed(1)
 })
 
 const lastUpdateText = computed(() => {
@@ -22,11 +24,13 @@ const lastUpdateText = computed(() => {
 
 const selectedVote = ref('')
 const hasVoted = ref(false)
+const { saveVote } = useDataStore()
 
 const onVoteNow = () => {
   if (hasVoted.value) {
     hasVoted.value = false
   } else {
+    saveVote(props.voteItem.id, selectedVote.value === 'like')
     hasVoted.value = true
     selectedVote.value = ''
   }
@@ -34,7 +38,7 @@ const onVoteNow = () => {
 </script>
 
 <template>
-  <div class="vote-item">
+  <div class="vote-item" :class="{ 'list-mode': mode === 'list' }">
     <div v-if="likePercentage !== dislikePercentage" class="vote-item__indicator">
       <div
         class="vote-button indicator"
@@ -77,6 +81,7 @@ const onVoteNow = () => {
         </button>
         <button
           class="icon-button vote-button vote-now"
+          :disabled="!selectedVote && !hasVoted"
           :class="{ selected: selectedVote !== '' }"
           @click="onVoteNow"
         >
@@ -102,6 +107,7 @@ const onVoteNow = () => {
 .vote-item {
   width: 300px;
   height: 300px;
+  aspect-ratio: 1 / 1;
   flex: 0 0 auto;
   position: relative;
 
@@ -229,7 +235,7 @@ const onVoteNow = () => {
     position: absolute;
     top: 96px;
     left: 0;
-    z-index: 5;
+    z-index: 4;
   }
 
   .vote-button {
@@ -270,10 +276,102 @@ const onVoteNow = () => {
       margin-right: 0;
       background-color: var(--color-darker-background);
       border: 1px solid var(--color-white);
+      cursor: pointer;
 
       &.selected {
         background-color: rgba(48, 48, 48, 0.6);
       }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media all and (min-width: 768px) {
+  .vote-item {
+    width: 100%;
+    height: 100%;
+
+    &__indicator {
+      position: absolute;
+      top: 43%;
+      left: 0;
+    }
+  }
+  // List mode styles
+  .vote-item.list-mode {
+    overflow: hidden;
+    width: 100%;
+    height: 142px;
+    aspect-ratio: unset;
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.0001) 0%,
+      #888888 19.79%,
+      #666666 50%,
+      rgba(51, 51, 51, 0.6) 71.88%
+    );
+
+    .vote-item__indicator {
+      top: 0;
+    }
+
+    .vote-item__content {
+      flex-direction: row;
+      background: linear-gradient(
+        82deg,
+        rgba(0, 0, 0, 0) 12%,
+        #888888 24.79%,
+        #666666 50%,
+        rgba(51, 51, 51, 0.6) 89.88%
+      );
+
+      padding-top: 6px;
+      padding-right: 12px;
+
+      .content__name {
+        position: absolute;
+        top: 0;
+        left: 20%;
+      }
+
+      .content__description {
+        position: absolute;
+        top: 48px;
+        left: 20%;
+        max-width: 40%;
+      }
+
+      .content__message {
+        position: absolute;
+        top: 6px;
+        right: 12px;
+      }
+    }
+
+    .vote-item__picture {
+      width: 216px;
+      height: 100%;
+      margin-left: -27px;
+    }
+  }
+}
+
+@media all and (min-width: 1100px) {
+  // List mode styles
+  .vote-item.list-mode {
+    height: 170px;
+
+    .vote-item__picture {
+      width: 295px;
+      height: auto;
+      position: absolute;
+      left: 10px;
+      top: -22px;
     }
   }
 }
