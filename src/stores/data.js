@@ -1,9 +1,9 @@
-import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import data from '../data/data.json';
+import { useStorage } from '@vueuse/core';
 
 export const useDataStore = defineStore('data', () => {
-  const items = ref(data);
+  const items = useStorage('coding-test-vue-michel', data);
 
   const saveVote = (id, like) => {
 
