@@ -6,7 +6,6 @@ import { useDataStore } from '@/stores/data'
 const props = defineProps(['voteItem', 'mode'])
 
 const likePercentage = computed(() => {
-  console.log('CALCULA LIKE')
   const totalVotes = props.voteItem.votes.positive + props.voteItem.votes.negative
   return totalVotes === 0 ? 0 : ((props.voteItem.votes.positive / totalVotes) * 100).toFixed(1)
 })
@@ -21,6 +20,8 @@ const lastUpdateText = computed(() => {
   const timeAgo = formatDistanceToNowStrict(date, { addSuffix: true })
   return `${timeAgo} in ${props.voteItem.category.charAt(0).toUpperCase() + props.voteItem.category.slice(1)}`
 })
+
+const pictureUrl = computed(() => `${import.meta.env.BASE_URL}/pictures/${props.voteItem.picture}`)
 
 const selectedVote = ref('')
 const hasVoted = ref(false)
@@ -99,7 +100,7 @@ const onVoteNow = () => {
         <img src="../assets/img/thumbs-down.svg" alt="thumbs down" />
       </div>
     </div>
-    <img class="vote-item__picture" :src="`/pictures/${voteItem.picture}`" />
+    <img class="vote-item__picture" :src="pictureUrl" />
   </div>
 </template>
 
