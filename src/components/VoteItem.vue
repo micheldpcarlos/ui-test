@@ -3,6 +3,9 @@ import { computed, ref } from 'vue'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { useDataStore } from '@/stores/data'
 
+import ThumbsUpIcon from '../assets/img/thumbs-up.svg'
+import ThumbsDownIcon from '../assets/img/thumbs-down.svg'
+
 const props = defineProps(['voteItem', 'mode'])
 
 const likePercentage = computed(() => {
@@ -45,12 +48,8 @@ const onVoteNow = () => {
         class="vote-button indicator"
         :class="likePercentage > dislikePercentage ? 'like' : 'dislike'"
       >
-        <img
-          v-if="likePercentage > dislikePercentage"
-          src="../assets/img/thumbs-up.svg"
-          alt="thumbs up"
-        />
-        <img v-else src="../assets/img/thumbs-down.svg" alt="thumbs down" />
+        <img v-if="likePercentage > dislikePercentage" :src="ThumbsUpIcon" alt="thumbs up" />
+        <img v-else :src="ThumbsDownIcon" alt="thumbs down" />
       </div>
     </div>
     <div class="vote-item__content">
@@ -70,7 +69,7 @@ const onVoteNow = () => {
           class="icon-button vote-button like"
           :class="{ selected: selectedVote === 'like' }"
         >
-          <img src="../assets/img/thumbs-up.svg" alt="thumbs up" />
+          <img :src="ThumbsUpIcon" alt="thumbs up" />
         </button>
         <button
           v-if="!hasVoted"
@@ -78,7 +77,7 @@ const onVoteNow = () => {
           class="icon-button vote-button dislike"
           :class="{ selected: selectedVote === 'dislike' }"
         >
-          <img src="../assets/img/thumbs-down.svg" alt="thumbs down" />
+          <img :src="ThumbsDownIcon" alt="thumbs down" />
         </button>
         <button
           class="icon-button vote-button vote-now"
@@ -92,12 +91,12 @@ const onVoteNow = () => {
     </div>
     <div class="vote-item__percentage">
       <div class="vote-item__percentage--like" :style="{ width: likePercentage + '%' }">
-        <img src="../assets/img/thumbs-up.svg" alt="thumbs up" />
+        <img :src="ThumbsUpIcon" alt="thumbs up" />
         <span>{{ likePercentage }}%</span>
       </div>
       <div class="vote-item__percentage--dislike" :style="{ width: dislikePercentage + '%' }">
         <span>{{ dislikePercentage }}%</span>
-        <img src="../assets/img/thumbs-down.svg" alt="thumbs down" />
+        <img :src="ThumbsDownIcon" alt="thumbs down" />
       </div>
     </div>
     <img class="vote-item__picture" :src="pictureUrl" />

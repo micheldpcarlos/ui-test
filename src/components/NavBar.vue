@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import SearchIcon from '../assets/img/search.svg'
+</script>
 
 <template>
   <nav class="nav" role="navigation">
@@ -23,7 +25,7 @@
           <form action="javascript:void(0)">
             <input class="nav__search-input" aria-label="search" type="text" />
             <button class="nav__search icon-button" alt="Search" type="submit">
-              <img src="../assets/img/search.svg" alt="search" />
+              <img :src="SearchIcon" alt="search" />
             </button>
           </form>
         </li>

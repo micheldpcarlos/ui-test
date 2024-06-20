@@ -1,5 +1,7 @@
 <script setup>
 import WikipediaIcon from '../assets/img/wikipedia-logo.svg'
+import ThumbsUpIcon from '../assets/img/thumbs-up.svg'
+import ThumbsDownIcon from '../assets/img/thumbs-down.svg'
 </script>
 
 <template>
@@ -30,10 +32,10 @@ import WikipediaIcon from '../assets/img/wikipedia-logo.svg'
           <p class="featured-card__cta">What’s Your Veredict?</p>
           <div class="featured-card__buttons">
             <button class="icon-button" aria-label="thumbs up">
-              <img src="../assets/img/thumbs-up.svg" alt="thumbs up" />
+              <img :src="ThumbsUpIcon" alt="thumbs up" />
             </button>
             <button class="icon-button" aria-label="thumbs down">
-              <img src="../assets/img/thumbs-down.svg" alt="thumbs down" />
+              <img :src="ThumbsDownIcon" alt="thumbs down" />
             </button>
           </div>
         </div>
