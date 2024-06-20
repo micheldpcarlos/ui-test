@@ -3,8 +3,8 @@ import { computed, ref } from 'vue'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { useDataStore } from '@/stores/data'
 
-import ThumbsUpIcon from '../assets/img/thumbs-up.svg'
-import ThumbsDownIcon from '../assets/img/thumbs-down.svg'
+import ThumbsUpIcon from '../assets/img/thumbs-up.svg?url'
+import ThumbsDownIcon from '../assets/img/thumbs-down.svg?url'
 
 const props = defineProps(['voteItem', 'mode'])
 

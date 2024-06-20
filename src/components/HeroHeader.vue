@@ -1,7 +1,7 @@
 <script setup>
 import WikipediaIcon from '../assets/img/wikipedia-logo.svg'
-import ThumbsUpIcon from '../assets/img/thumbs-up.svg'
-import ThumbsDownIcon from '../assets/img/thumbs-down.svg'
+import ThumbsUpIcon from '../assets/img/thumbs-up.svg?url'
+import ThumbsDownIcon from '../assets/img/thumbs-down.svg?url'
 </script>
 
 <template>

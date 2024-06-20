@@ -1,5 +1,5 @@
 <script setup>
-import SearchIcon from '../assets/img/search.svg'
+import SearchIcon from '../assets/img/search.svg?url'
 </script>
 
 <template>
